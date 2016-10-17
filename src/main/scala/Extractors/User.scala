@@ -16,6 +16,10 @@ object PremiumUser {
     Some(user.name, user.score)
 }
 
+object premiumCandidate {
+  def unapply(user: FreeUser): Boolean = user.upgradeProbability > 0.75
+}
+
 // no need to implement unapply method for case classes
 case class Administrator(name: String, score: Int) extends User
 case class Moderator(name: String, score: Int) extends User

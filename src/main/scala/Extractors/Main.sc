@@ -23,5 +23,12 @@ user3 match {
   case _ => sendRegularNewsletter(user3)
 }
 
+// Infix operator
+val xs = 58 #:: 43 #:: 93 #:: Stream.empty
+xs match {
+  case #::(first, #::(second, _)) => first - second
+  case _ => -1
+}
+
 def initiateSpamProgram(freeUser: FreeUser) = "initiate"
 def sendRegularNewsletter(user: User) = "send"

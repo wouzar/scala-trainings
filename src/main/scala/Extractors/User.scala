@@ -1,7 +1,7 @@
 package Extractors
 
 trait User {
-  def name: String // Why def?
+  def name: String // Why def? Because def is the most abstract modifier for field in interface
   def score: Int
 }
 class FreeUser(val name: String, val score: Int, val upgradeProbability: Double) extends User

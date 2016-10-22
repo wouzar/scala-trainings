@@ -2,7 +2,7 @@ package sequenceExtractors
 
 object Main extends App {
 
-  def f1 = {
+  def fixedElementsMatching = {
     val xs = 3 :: 6 :: 12 :: Nil
     xs match {
       case List(a, b) => a * b
@@ -11,7 +11,7 @@ object Main extends App {
     }
   }
 
-  def f2 = {
+  def variableElementsMatching = {
     val xs = 3 :: 6 :: 12 :: 24 :: Nil
     xs match {
       case List(a, b, _*) => a * b
@@ -23,6 +23,12 @@ object Main extends App {
     case GivenNames(firstName, _*) => s"Good morning, $firstName!"
     case _ => "Welcome! Please make sure to fill in your name!"
   }
+
+  def greet(fullName: String) = fullName match {
+    case Names(lastName, firstName, _*) => s"Good morning, $firstName $lastName!"
+    case _ => "Welcome! Please make sure to fill in your name!"
+  }
+
 }
 
 object GivenNames {
@@ -32,4 +38,11 @@ object GivenNames {
   }
 }
 
+object Names {
+  def unapplySeq(name: String): Option[(String, String, Array[String])] = {
+    val names = name.trim.split(" ")
+    if (names.size < 2) None
+    else Some((names.last, names.head, names.drop(1).dropRight(1)))
+  }
+}
 
